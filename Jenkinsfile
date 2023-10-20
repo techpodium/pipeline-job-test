@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sshagent(credentials: ['jenkins-user-ssh-private-key']) {
-                  sh ("scp index.html root@192.168.56.3:/var/www/html/")
+                  sh ("scp web/* root@192.168.56.3:/var/www/html/")
                 }
             }
         }
