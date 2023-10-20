@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                cleanWs()
                 echo 'Building..'
             }
         }
