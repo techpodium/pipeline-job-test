@@ -7,7 +7,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                cleanWs()
                 echo 'Building..'
             }
         }
@@ -22,6 +21,7 @@ pipeline {
                 sshagent(credentials: ['jenkins-user-ssh-private-key']) {
                   sh ("scp web/* root@192.168.56.3:/var/www/html/")
                 }
+                cleanWs()
             }
         }
     }
