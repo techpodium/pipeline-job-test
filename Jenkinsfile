@@ -7,6 +7,11 @@ pipeline {
                 cleanWs()
             }
         }
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Testing..'
