@@ -1,28 +1,45 @@
 pipeline {
     agent any
     stages {
-        stage('Code Test') {
+        stage('Non-Parallel Stage') {
             steps {
-                echo 'Building..'
-                sleep 3
+                echo 'This stage will be executed first.'
             }
         }
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                sleep 3
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-                sleep 3
-            }
-        }
-        stage('Application Test') {
-            steps {
-                echo 'Testing..'
-                sleep 3
+        stage('Parallel Stage') {
+            failFast true
+            parallel {
+                stage('sub-stage A') {
+                    agent any
+                    steps {
+                        echo "On sub-stage A"
+                        sleep 5
+                    }
+                }
+                stage('sub-stage B') {
+                    agent any
+                    steps {
+                        echo "On sub-stage B"
+                        sleep 10
+                    }
+                }
+                stage('sub-stage C') {
+                    agent any
+                    stages {
+                        stage('Nested stage-1') {
+                            steps {
+                                echo "In stage Nested stage-1 within sub-stage C"
+                                sleep 10
+                            }
+                        }
+                        stage('Nested stage-2') {
+                            steps {
+                                echo "In stage Nested stage-2 within sub-stage C"
+                                sleep 10
+                            }
+                        }
+                    }
+                }
             }
         }
     }
