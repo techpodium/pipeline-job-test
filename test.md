@@ -1,5 +1,1 @@
-- test commit with secret
-- with shared secret
-- test
-- test
-- test
+testing pipeline on master branch
