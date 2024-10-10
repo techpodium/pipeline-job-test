@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Info') {
             steps {
-                echo "Job: ${env.JOB_NAME} is building on branch ${BRANCH_NAME} and build-id is ${env.BUILD_ID}"
+                echo "Job: ${env.JOB_NAME} is building on branch ${env.GIT_BRANCH} and build-id is ${env.BUILD_ID}"
                 sh 'sleep 5'
             }
         }
